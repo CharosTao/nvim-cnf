@@ -83,6 +83,7 @@ vim.o.shortmess = vim.o.shortmess .. 'c'
 vim.o.pumheight = 10
 -- always show tabline
 vim.o.showtabline = 2
+vim.opt.completeopt = { "menu", "menuone", "noselect" }
 EOF
 
 
@@ -110,7 +111,6 @@ Plug 'hrsh7th/vim-vsnip'
 Plug 'onsails/lspkind-nvim'
 Plug 'glepnir/lspsaga.nvim', { 'branch': 'main' }
 Plug 'simrat39/symbols-outline.nvim'
-Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}  " We recommend updating the parsers on update
 call plug#end()
 
 " -------------------------
@@ -131,6 +131,8 @@ lua require('plugin-config/nvim-cmp')
 lua require('plugin-config/symbols_outline')
 lua require('plugin-config/lspsaga')
 lua require('plugin-config/nvim-treesitter')
+lua require('plugin-config/telescope')
+lua require('plugin-config/gitsigns')
 " color
 " Vim Script
 " lua require('plugin-config/tokyonight')
@@ -140,11 +142,13 @@ lua require('plugin-config/nvim-treesitter')
 " nvim-tree
 " ---------
 
-nmap <leader>m :NvimTreeToggle <cr>
 nmap <a-m> :NvimTreeToggle <cr>
+nnoremap <a-n> :SymbolsOutline <cr>
+nnoremap <leader>md :MarkdownPreview <cr>
 " ---------
 " map keys
 " ---------
+nnoremap <c-q> :q <cr>
 nnoremap <c-s> :write <cr>
 nnoremap <leader>gi <cmd>lua vim.lsp.buf.implementation()<CR>
 nnoremap <leader>gD <cmd>lua vim.lsp.buf.declaration()<CR>
@@ -175,6 +179,11 @@ tnoremap <silent> <A-d> <C-\><C-n>:lua require('lspsaga.floaterm').close_float_t
 " code action
 nnoremap <silent><leader>gc <cmd>lua require('lspsaga.codeaction').code_action()<CR>
 
+" Using Lua functions
+nnoremap <leader>ff <cmd>lua require('telescope.builtin').find_files()<cr>
+nnoremap <leader>fg <cmd>lua require('telescope.builtin').live_grep()<cr>
+nnoremap <leader>fb <cmd>lua require('telescope.builtin').buffers()<cr>
+nnoremap <leader>fh <cmd>lua require('telescope.builtin').help_tags()<cr>
 
 " ---------
 " map keys for coc

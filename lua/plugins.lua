@@ -29,7 +29,7 @@ return require('packer').startup(function()
   }
   -- theme nightfox
   use "EdenEast/nightfox.nvim" -- Packer
-  use "lewis6991/gitsigns.nvim"
+  use 'lewis6991/gitsigns.nvim'
   -- tag = 'release' -- To use the latest release
   -- ***********
   -- lspconfig
@@ -48,5 +48,13 @@ return require('packer').startup(function()
     "iamcco/markdown-preview.nvim",
     run = function() vim.fn["mkdp#util#install"]() end,
   })
+	use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ":TSUpdate"
+    }
+	use {
+  'nvim-telescope/telescope.nvim',
+  requires = { {'nvim-lua/plenary.nvim'} }
+}
 end)
 
